@@ -1,0 +1,17 @@
+{
+    "window_size" : 5,
+    "inter_data_path" : "./intel_data/interpolated",
+    "pred_X_train_path": "./data_arrays/pred_X_train.npy",
+    "pred_X_val_path": "./data_arrays/pred_X_val.npy",
+    "pred_X_test_path": "./data_arrays/pred_X_test.npy",
+    "pred_y_train_path": "./data_arrays/pred_y_train.npy",
+    "pred_y_val_path": "./data_arrays/pred_y_val.npy",
+    "pred_y_test_path": "./data_arrays/pred_y_test.npy",
+    "cls_X_train_path": "./data_arrays/cls_X_train.npy",
+    "cls_X_val_path": "./data_arrays/cls_X_val.npy",
+    "cls_X_test_path": "./data_arrays/cls_X_test.npy",
+    "cls_y_train_path": "./data_arrays/cls_y_train.npy",
+    "cls_y_val_path" : "./data_arrays/cls_y_val.npy",
+    "cls_y_test_path" : "./data_arrays/pred_y_test.npy",
+    "cls_lrn_cur_path" : "./figures/cls_lrn_cur.png"
+}
