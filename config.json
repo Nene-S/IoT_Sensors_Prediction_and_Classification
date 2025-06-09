@@ -1,5 +1,6 @@
 {
-    "window_size" : 5,
+    "window_size" : 8,
+    "forecast_horizon" : 4,
     "inter_data_path" : "./intel_data/interpolated",
     "pred_X_train_path": "./data_arrays/pred_X_train.npy",
     "pred_X_val_path": "./data_arrays/pred_X_val.npy",
