@@ -6,7 +6,7 @@ from utils import CustomDataset
 with open("config.json", "r") as file:
     config = json.load(file)
 
-def cnnMlp_data():
+def cls_data():
     # load data array
     cls_X_train= np.load(config["cls_X_train_path"])
     cls_y_train= np.load(config["cls_y_train_path"])
@@ -24,7 +24,7 @@ def cnnMlp_data():
 
     return train_dataset, val_dataset
 
-def cnnLstm_data():
+def pred_data():
     # load data array
     pred_X_train= np.load(config["pred_X_train_path"])
     pred_y_train= np.load(config["pred_y_train_path"])

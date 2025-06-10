@@ -30,15 +30,13 @@ class CNNMLP(nn.Module):
 
 class CNNLSTM(nn.Module):
   def __inin__(self,input_size, horizon, lstm_hidden_units, cnn_output_channel, lstm_hidden_layer,
-               num_mote_ids,num_fault_types,num_mote_fault,embed_dim= 32):
+               num_mote_ids, embed_dim=2):
     super(CNNLSTM).__init__()
 
     self.lstm_hidden_units = lstm_hidden_units
     self.lstm_hidden_layer = lstm_hidden_layer
     self.mote_embed = nn.Embedding(num_mote_ids, embed_dim)
-    self.fault_embed = nn.Embedding(num_fault_types, embed_dim)
-    self.mote_fault_embed = nn.Embedding(num_mote_fault, embed_dim)
-
+   
     self.cnn = nn.Conv1d(in_channels=input_size, out_channels=cnn_output_channel, 
                          kernel_size=3, padding=1, stride=1)
     self.lstm = nn.LSTM(input_size=cnn_output_channel, hidden_size=lstm_hidden_units, 
@@ -54,19 +52,18 @@ class CNNLSTM(nn.Module):
     x_num = x_num.permute(0,2,1)
 
     mote_id_emb = self.mote_embed(x_cat[:, :, 0])
-    fault_type_emb = self.fault_embed(x_cat[:, :, 1])
-    mote_fault_emb = self.mote_fault_embed(x_cat[:, :, 2])
-
-    combined_input = torch.cat((x_num, mote_id_emb, fault_type_emb, mote_fault_emb), dim=2)
+ 
+    combined_input = torch.cat((x_num, mote_id_emb), dim=2)
 
     h0, c0 = self.initial_hidden(batch_size)
+    h0, c0 = h0.to(x_num.device), c0.to(x_num.device)
 
     out, (hidden, cell) = self.lstm(combined_input, (h0, c0))
     out = self.fc(out[:,-1, :])
     
     return out
 
-  def init_hidden(self, batch_size):
+  def initial_hidden(self, batch_size):
     hidden = torch.zeros(self.lstm_hidden_layer, batch_size, self.lstm_hidden_units)
     cell = torch.zeros(1, batch_size, self.lstm_hidden_units)
     return hidden, cell

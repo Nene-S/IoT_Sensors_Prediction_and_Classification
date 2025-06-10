@@ -2,17 +2,30 @@
     "window_size" : 8,
     "forecast_horizon" : 4,
     "inter_data_path" : "./intel_data/interpolated",
-    "pred_X_train_path": "./data_arrays/pred_X_train.npy",
-    "pred_X_val_path": "./data_arrays/pred_X_val.npy",
-    "pred_X_test_path": "./data_arrays/pred_X_test.npy",
-    "pred_y_train_path": "./data_arrays/pred_y_train.npy",
-    "pred_y_val_path": "./data_arrays/pred_y_val.npy",
-    "pred_y_test_path": "./data_arrays/pred_y_test.npy",
+
+    "X_enc_tem_train_path": "./data_arrays/X_enc_tem_train.npy",
+    "X_enc_cat_train_path": "./data_arrays/X_enc_cat_train.npy",
+    "X_dec_tem_train_path": "./data_arrays/X_dec_tem_train.npy",
+    "X_dec_cat_train_path": "./data_arrays/X_dec_cat_train.npy",
+    "y_dec_train_path": "./data_arrays/y_dec_train.npy",
+
+    "X_enc_tem_valid_path": "./data_arrays/X_enc_tem_valid.npy",
+    "X_enc_cat_valid_path": "./data_arrays/X_enc_cat_valid.npy",
+    "X_dec_tem_valid_path": "./data_arrays/X_dec_tem_valid.npy",
+    "X_dec_cat_valid_path": "./data_arrays/X_dec_cat_valid.npy",
+    "y_dec_valid_path": "./data_arrays/y_dec_valid.npy",
+
+    "X_enc_tem_test_path": "./data_arrays/X_enc_tem_test.npy",
+    "X_enc_cat_test_path": "./data_arrays/X_enc_cat_test.npy",
+    "X_dec_tem_test_path": "./data_arrays/X_dec_tem_test.npy",
+    "X_dec_cat_test_path": "./data_arrays/X_dec_cat_test.npy",
+    "y_dec_test_path": "./data_arrays/y_dec_test.npy",
+
     "cls_X_train_path": "./data_arrays/cls_X_train.npy",
     "cls_X_val_path": "./data_arrays/cls_X_val.npy",
     "cls_X_test_path": "./data_arrays/cls_X_test.npy",
     "cls_y_train_path": "./data_arrays/cls_y_train.npy",
     "cls_y_val_path" : "./data_arrays/cls_y_val.npy",
-    "cls_y_test_path" : "./data_arrays/pred_y_test.npy",
+    "cls_y_test_path" : "./data_arrays/cls_y_test.npy",
     "cls_lrn_cur_path" : "./figures/cls_lrn_cur.png"
 }
