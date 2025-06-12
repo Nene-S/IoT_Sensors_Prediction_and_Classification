@@ -4,7 +4,7 @@ import torch.nn as nn
 from tqdm.auto import tqdm
 from torch.utils.data import DataLoader
 from model import CNNMLP
-from load_data import cnnMlp_data
+from load_data import cls_data_train
 from utils import learning_curve
 
 with open("config.json", "r") as file:
@@ -72,7 +72,7 @@ def train_epochs(model, epochs, train_dl, val_dl, loss_func, optimizer, device):
 
 
 def main():
-    train_dataset, val_dataset = cnnMlp_data()
+    train_dataset, val_dataset = cls_data_train()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     batch_size = 32
@@ -80,13 +80,17 @@ def main():
     val_dl = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
 
     lr = 0.001
-    model = CNNMLP(input_size=1, num_hidden_layers=2, num_hidden_units=30,num_output_units=5).to(device)
-    epochs = 30
+    model = CNNMLP(input_channel=1,output_channel=3, 
+               num_cnn_layers=2,window_size=1, num_output_units=5).to(device)
+    epochs = 3
     loss_func = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
     history = train_epochs(model, epochs, train_dl, val_dl, loss_func, optimizer, device)
 
     learning_curve(history, config["cls_lrn_cur_path"])
+
+if __name__ == "__main__":
+    main()
 
 

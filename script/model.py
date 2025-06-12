@@ -3,7 +3,7 @@ import torch
 
 class CNNMLP(nn.Module):
   def __init__(self, input_channel=1,output_channel=3, 
-               num_cnn_layers=1,window_size=5, num_output_units=5):
+               num_cnn_layers=1,window_size=1, num_output_units=5):
     super(CNNMLP, self).__init__()
     self.num_cnn_layers = num_cnn_layers
     self.window_size = window_size
@@ -71,8 +71,8 @@ class CNNLSTM(nn.Module):
 
   
 if __name__ == "__main__":
-  rn = torch.rand(4, 1, 3)
-  model = CNNMLP(1,2, num_cnn_layers=2, num_output_units=1, window_size=3)
+  rn = torch.rand(4, 1, 1)
+  model = CNNMLP(1,2, num_cnn_layers=2, num_output_units=1, window_size=1)
   # for params in model.parameters():
   #   print(params)
   out = model(rn)
