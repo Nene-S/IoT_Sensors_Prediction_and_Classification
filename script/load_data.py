@@ -1,43 +1,63 @@
 import torch
 import numpy as np
 import json
-from utils import CustomDataset
+from utils import ClsDataset, PredDataset
 
 with open("config.json", "r") as file:
     config = json.load(file)
 
-def cls_data():
-    # load data array
-    cls_X_train= np.load(config["cls_X_train_path"])
-    cls_y_train= np.load(config["cls_y_train_path"])
-    cls_X_val= np.load(config["cls_X_val_path"])
-    cls_y_val= np.load(config["cls_y_val_path"])
+def cls_data_train():
+    # load data and convert to tensor
+    X_train= torch.tensor(np.load(config["cls_X_train_path"])).float()
+    y_train= torch.tensor(np.load(config["cls_y_train_path"])).long()
+    X_val= torch.tensor(np.load(config["cls_X_val_path"])).float()
+    y_val= torch.tensor(np.load(config["cls_y_val_path"])).long()
 
-    # convert to tensor
-    X_train = torch.tensor(cls_X_train).float()
-    y_train = torch.tensor(cls_y_train).float()
-    X_val = torch.tensor(cls_X_val).float()
-    y_val = torch.tensor(cls_y_val).float()
-
-    train_dataset = CustomDataset(X_train, y_train)
-    val_dataset = CustomDataset(X_val, y_val)
+    train_dataset = ClsDataset(X_train, y_train)
+    val_dataset = ClsDataset(X_val, y_val)
 
     return train_dataset, val_dataset
 
-def pred_data():
-    # load data array
-    pred_X_train= np.load(config["pred_X_train_path"])
-    pred_y_train= np.load(config["pred_y_train_path"])
-    pred_X_val= np.load(config["pred_X_val_path"])
-    pred_y_val= np.load(config["pred_y_val_path"])
 
-    # convert to tensor
-    X_train = torch.tensor(pred_X_train).float()
-    y_train = torch.tensor(pred_y_train).float()
-    X_val = torch.tensor(pred_X_val).float()
-    y_val = torch.tensor(pred_y_val).float()
+def cls_data_test():
+    X_test= torch.tensor(np.load(config["cls_X_test_path"])).float()
+    y_test= torch.tensor(np.load(config["cls_y_test_path"])).long()
+    
+    test_dataset = ClsDataset(X_test, y_test)
 
-    train_dataset = CustomDataset(X_train, y_train)
-    val_dataset = CustomDataset(X_val, y_val)
+    return test_dataset
 
+
+def pred_data_train():
+    # Train
+    X_enc_num_train = torch.tensor(np.load(config["X_enc_num_train_path"])).float()
+    X_enc_cat_train = torch.tensor(np.load(config["X_enc_cat_train_path"])).long()
+    X_dec_num_train = torch.tensor(np.load(config["X_dec_num_train_path"])).float()
+    X_dec_cat_train = torch.tensor(np.load(config["X_dec_cat_train_path"])).long()
+    y_dec_train     = torch.tensor(np.load(config["y_dec_train_path"])).float()
+
+    # Validation
+    X_enc_num_valid = torch.tensor(np.load(config["X_enc_num_valid_path"])).float()
+    X_enc_cat_valid = torch.tensor(np.load(config["X_enc_cat_valid_path"])).long()
+    X_dec_num_valid = torch.tensor(np.load(config["X_dec_num_valid_path"])).float()
+    X_dec_cat_valid = torch.tensor(np.load(config["X_dec_cat_valid_path"])).long()
+    y_dec_valid     = torch.tensor(np.load(config["y_dec_valid_path"])).float()
+
+    train_dataset =PredDataset(X_enc_num_train,X_enc_cat_train, X_dec_num_train, 
+                               X_dec_cat_train, y_dec_train)
+    val_dataset = PredDataset(X_enc_num_valid, X_enc_cat_valid, 
+                                X_dec_num_valid, X_dec_cat_valid, y_dec_valid)
     return train_dataset, val_dataset
+
+
+def pred_data_test():
+  
+    X_enc_num_test = torch.tensor(np.load(config["X_enc_num_test_path"])).float()
+    X_enc_cat_test = torch.tensor(np.load(config["X_enc_cat_test_path"])).long()
+    X_dec_num_test = torch.tensor(np.load(config["X_dec_num_test_path"])).float()
+    X_dec_cat_test = torch.tensor(np.load(config["X_dec_cat_test_path"])).long()
+    y_dec_test     = torch.tensor(np.load(config["y_dec_test_path"])).float()
+
+    test_dataset = PredDataset(X_enc_num_test, X_enc_cat_test,X_dec_num_test,
+                               X_dec_cat_test, y_dec_test)
+    return test_dataset

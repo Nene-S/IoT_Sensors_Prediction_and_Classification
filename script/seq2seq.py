@@ -85,8 +85,8 @@ class AttenDecoder(nn.Module):
                 dec_input = dec_outputs[-1].detach()
 
             dec_out, dec_hid, dec_cell, att_weights = self.forward_step(dec_input, dec_hid, dec_cell, en_outputs)
-            dec_outputs.append(dec_out.detach())
-            attentions.append(att_weights.detach())
+            dec_outputs.append(dec_out)
+            attentions.append(att_weights)
 
         return dec_outputs, dec_hid, dec_cell, attentions
     
@@ -111,5 +111,7 @@ if __name__ == "__main__":
 
   en_out, en_hid, en_cell = encoder(x_tem, x_cat)
   de_out, de_hid, de_cell, atten = decoder(en_out, en_hid, en_cell, x_cat, x_tem)
-  print(de_out)
+#   print(de_out)
+  de_out = torch.stack(de_out, dim=1)
+  print(de_out.view(-1))
 
