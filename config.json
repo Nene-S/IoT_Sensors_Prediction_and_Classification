@@ -22,11 +22,30 @@
     "X_dec_cat_test_path": "./data_arrays/X_dec_cat_test.npy",
     "y_dec_test_path": "./data_arrays/y_dec_test.npy",
 
+    "X_num_train_path" : "./data_arrays/X_num_train.npy",
+    "X_cat_train_path" : "./data_arrays/X_cat_train.npy",
+    "y_train_path" : "./data_arrays/y_train.npy",
+
+    "X_num_valid_path" : "./data_arrays/X_num_valid.npy",
+    "X_cat_valid_path" : "./data_arrays/X_cat_valid.npy",
+    "y_valid_path" : "./data_arrays/y_valid.npy",
+
+    "X_num_test_path" : "./data_arrays/X_num_test.npy",
+    "X_cat_test_path" : "./data_arrays/X_cat_test.npy",
+    "y_test_path" : "./data_arrays/y_test.npy",
+
     "cls_X_train_path": "./data_arrays/cls_X_train.npy",
     "cls_X_val_path": "./data_arrays/cls_X_val.npy",
     "cls_X_test_path": "./data_arrays/cls_X_test.npy",
     "cls_y_train_path": "./data_arrays/cls_y_train.npy",
     "cls_y_val_path" : "./data_arrays/cls_y_val.npy",
     "cls_y_test_path" : "./data_arrays/cls_y_test.npy",
-    "cls_lrn_cur_path" : "./figures/cls_lrn_cur.png"
+
+    "cls_lrn_plot_path" : "./figures/cls_lrn_plot.png",
+    "cnnlstm_lrn_plot_path" : "./figures/cnnlstm_lrn_plot.png",
+    "cnngru_lrn_plot_path" : "./figures/cnngru_lrn_plot.png",
+    "seq2seq_lrn_plot_path" : "./figures/seq2seq_lrn_plot.png",
+
+    "seq2seq_path" : "./trained_models/seq2seq_model.pth",
+    "cnn_mlp_path" : "./trained_models/cnnmlp_model.pth"
 }
