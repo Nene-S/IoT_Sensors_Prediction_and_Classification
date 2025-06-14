@@ -95,7 +95,7 @@ def main():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     lr = 1e-4
-    epochs = 1
+    epochs = 4
     loss_fnc = nn.MSELoss()
     mae = nn.L1Loss()
 
