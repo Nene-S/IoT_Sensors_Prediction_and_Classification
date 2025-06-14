@@ -81,7 +81,7 @@ class CNNGRU(nn.Module):
    
     self.cnn = nn.Conv1d(in_channels=input_size, out_channels=cnn_output_channel, 
                          kernel_size=3, padding=1, stride=1)
-    self.lstm = nn.GRU(input_size=self.gru_input_size, hidden_size=gru_hidden_units, 
+    self.gru = nn.GRU(input_size=self.gru_input_size, hidden_size=gru_hidden_units, 
                         num_layers=gru_hidden_layer, batch_first=True)
     
     self.fc = nn.Linear(gru_hidden_units, 1)
@@ -100,13 +100,13 @@ class CNNGRU(nn.Module):
     h0 = self.initial_hidden(batch_size)
     h0= h0.to(x_num.device)
 
-    out, hidden = self.lstm(combined_input, h0)
+    out, hidden = self.gru(combined_input, h0)
     out = self.fc(out[:,-1, :])
     
     return out
 
   def initial_hidden(self, batch_size):
-    hidden = torch.zeros(self.lstm_hidden_layer, batch_size, self.lstm_hidden_units)
+    hidden = torch.zeros(self.gru_hidden_layer, batch_size, self.gru_hidden_units)
     return hidden
 
 
