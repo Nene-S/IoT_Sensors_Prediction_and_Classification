@@ -5,7 +5,7 @@ from tqdm.auto import tqdm
 from torch.utils.data import DataLoader
 from model import CNNMLP
 from load_data import cls_data_train
-from utils import learning_curve_cls
+from utils import learning_plot_cls
 
 with open("config.json", "r") as file:
     config = json.load(file)
@@ -59,8 +59,8 @@ def train_epochs(model, epochs, train_dl, val_dl, loss_func, optimizer, device):
 
         print(
             f"Epoch: {epoch:02d} |",
-            f"train loss: {train_loss:.4f} |", f"train_accuracy: {train_acc:.4f} |",
-            f"val loss: {val_loss:.4f} |", f"val_accuracy: {val_acc:.4f}" 
+            f"train loss: {train_loss:.4f} |", f"train accuracy: {train_acc:.4f} |",
+            f"val loss: {val_loss:.4f} |", f"validation accuracy: {val_acc:.4f}" 
         )
 
         history["train_loss"].append(train_loss)
@@ -83,19 +83,19 @@ def main():
 
     lr = 0.001
     model = CNNMLP(input_channel=1,output_channel=3, 
-               num_cnn_layers=1,window_size=1, num_output_units=5).to(device)
+               num_cnn_layers=1,window_size=5, num_output_units=5).to(device)
     for p in model.parameters():
         if p.dim() > 1:
             nn.init.xavier_uniform_(p)
-    epochs = 3
+    epochs = 5
     loss_func = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
     history = train_epochs(model, epochs, train_dl, val_dl, loss_func, optimizer, device)
 
-    learning_curve_cls(history, config["cls_lrn_plot_path"])
+    learning_plot_cls(history, config["cls_lrn_plot_path"])
 
-    # torch.save(model.state_dict(), config["cnn_mlp_path"])
+    torch.save(model.state_dict(), config["cnn_mlp_path"])
 
 if __name__ == "__main__":
     main()

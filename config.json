@@ -46,6 +46,7 @@
     "cnngru_lrn_plot_path" : "./figures/cnngru_lrn_plot.png",
     "seq2seq_lrn_plot_path" : "./figures/seq2seq_lrn_plot.png",
 
-    "seq2seq_path" : "./trained_models/seq2seq_model.pth",
+    "cnnlstm_model_path" : "./trained_models/cnnlstm_model.pth",
+    "cnngru_model_path" : "./trained_models/cnngru_model.pth",
     "cnn_mlp_path" : "./trained_models/cnnmlp_model.pth"
 }

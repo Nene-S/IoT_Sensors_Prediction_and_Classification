@@ -3,26 +3,27 @@ import torch
 
 class CNNMLP(nn.Module):
   def __init__(self, input_channel=1,output_channel=3, 
-               num_cnn_layers=1,window_size=1, num_output_units=5):
+               num_cnn_layers=1,window_size=1, num_output_units=5, dropout=0.5):
     super(CNNMLP, self).__init__()
     self.num_cnn_layers = num_cnn_layers
     self.window_size = window_size
   
-    self.layers = self.CreateLayer(input_channel,output_channel, num_output_units)
+    self.layers = self.CreateLayer(input_channel,output_channel, num_output_units, dropout)
 
   def forward(self, x):
     out = self.layers(x)
 
     return out
 
-  def CreateLayer(self, input_channel,output_channel, num_output_units):
+  def CreateLayer(self, input_channel,output_channel, num_output_units,dropout):
     layer = []
     for i in range(self.num_cnn_layers):
-      layer.append(nn.Conv1d(input_channel, output_channel, kernel_size=1, padding=0, bias=False))
+      layer.append(nn.Conv1d(input_channel, output_channel, kernel_size=3, padding=1, bias=False))
       layer.append(nn.BatchNorm1d(output_channel))
       layer.append(nn.ReLU())
       input_channel = output_channel
     layer.append(nn.Flatten())
+    layer.append(nn.Dropout(dropout))
     layer.append(nn.Linear(output_channel*self.window_size, num_output_units))
 
     return nn.Sequential(*layer)
@@ -112,7 +113,8 @@ class CNNGRU(nn.Module):
 
   
 if __name__ == "__main__":
-  rn = torch.rand(4, 1, 1)
-  model = CNNMLP(1,2, num_cnn_layers=2, num_output_units=1, window_size=1)
-  out = model(rn)
-  print(out)
+  # rn = torch.rand(4, 1, 1)
+  model = model = CNNMLP(input_channel=1,output_channel=3, 
+               num_cnn_layers=1,window_size=1, num_output_units=5)
+               
+  print(model.layers[:-2])

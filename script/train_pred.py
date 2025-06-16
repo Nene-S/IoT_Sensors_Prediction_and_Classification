@@ -105,7 +105,10 @@ def main():
     lstm_optimizer = torch.optim.Adam(lstm_model.parameters(), lr) 
 
     history = train_epochs(epochs, train_dl, valid_dl, lstm_model,lstm_optimizer, loss_fnc, mae, device)
+
     learning_curve_pred(history, config["cnnlstm_lrn_plot_path"])
+
+    torch.save(lstm_model.state_dict(), config["cnnlstm_model_path"])
 
     #  Train CNN_GRU
     gru_model = CNNGRU(input_size=1, gru_hidden_units=8, cnn_output_channel=3,
@@ -116,7 +119,7 @@ def main():
 
     learning_curve_pred(history, config["cnngru_lrn_plot_path"])
 
-    # torch.save()
+    torch.save(gru_model.state_dict(), config["cnngru_model_path"])
 
 if __name__ == "__main__":
     main()
