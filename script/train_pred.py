@@ -95,7 +95,7 @@ def main():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     lr = 1e-4
-    epochs = 4
+    epochs = 10
     loss_fnc = nn.MSELoss()
     mae = nn.L1Loss()
 
@@ -106,9 +106,9 @@ def main():
 
     history = train_epochs(epochs, train_dl, valid_dl, lstm_model,lstm_optimizer, loss_fnc, mae, device)
 
-    learning_curve_pred(history, config["cnnlstm_lrn_plot_path"])
-
     torch.save(lstm_model.state_dict(), config["cnnlstm_model_path"])
+
+    learning_curve_pred(history, config["cnnlstm_lrn_plot_path"])
 
     #  Train CNN_GRU
     gru_model = CNNGRU(input_size=1, gru_hidden_units=8, cnn_output_channel=3,
@@ -117,9 +117,10 @@ def main():
 
     history = train_epochs(epochs, train_dl, valid_dl, gru_model,gru_optimizer, loss_fnc, mae, device)
 
+    torch.save(gru_model.state_dict(), config["cnngru_model_path"])
+
     learning_curve_pred(history, config["cnngru_lrn_plot_path"])
 
-    torch.save(gru_model.state_dict(), config["cnngru_model_path"])
 
 if __name__ == "__main__":
     main()

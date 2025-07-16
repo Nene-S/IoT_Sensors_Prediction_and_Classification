@@ -85,4 +85,6 @@ def seq2seq_data_test():
     return test_dataset
 
 if __name__ =="__main__":
-    _, _= pred_data_train()
+    train_dl, valid_dl = cls_data_train()
+    x_, y_ = next(iter(train_dl))
+    print(x_.shape, y_.shape)

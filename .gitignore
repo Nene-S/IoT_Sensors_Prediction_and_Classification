@@ -4,5 +4,7 @@ intel_data/
 .ipynb_checkpoints/
 # Ignore all __pycache__ directories
 __pycache__/
-# Ignore proprocess_
+# Ignore proprocess_ and regression_notebook
 notebooks/preprocess_.ipynb
+regression_notebook.ipynb
+notebooks/preprocess-Copy1.ipynb

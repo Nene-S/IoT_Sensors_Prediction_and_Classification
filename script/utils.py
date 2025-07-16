@@ -73,7 +73,7 @@ def learning_plot_cls(hist, path):
         plt.show()
 
 
-def learning_curve_pred(hist, path):
+def learning_curve_pred(hist, path, show=True):
     """Plots and saves learning curves showing MSE, RMSE, and MAE over epochs."""
 
     x_arr = np.arange(1, len(hist["train_mse"]) + 1)
@@ -104,4 +104,5 @@ def learning_curve_pred(hist, path):
     plt.tight_layout()
     os.makedirs(os.path.dirname(path), exist_ok=True)
     plt.savefig(path, dpi=300)
-    plt.show()
+    if show:
+        plt.show()

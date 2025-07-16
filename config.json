@@ -48,5 +48,6 @@
 
     "cnnlstm_model_path" : "./trained_models/cnnlstm_model.pth",
     "cnngru_model_path" : "./trained_models/cnngru_model.pth",
-    "cnn_mlp_path" : "./trained_models/cnnmlp_model.pth"
+    "cnnmlp_model_path" : "./trained_models/cnnmlp_model.pth",
+    "cnnxgb_model_path" : "./trained_models/cnnxgb_model.pkl"
 }
