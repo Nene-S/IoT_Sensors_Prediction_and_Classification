@@ -10,4 +10,4 @@ notebooks/preprocess_.ipynb
 regression_notebook.ipynb
 notebooks/preprocess-Copy1.ipynb
 # ignore some arrays
-data_arrays/cls_X_train.npy
+data_arrays/
